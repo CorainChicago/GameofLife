@@ -1,5 +1,5 @@
-var boardHeight = 30;
-var boardWidth = 30;
+var boardHeight = 40;
+var boardWidth = boardHeight;
 
 
 var $board = $('#board');
@@ -13,7 +13,7 @@ function createBoard(boardHeight, boardWidth){
 		var $row = $("<div class = 'row" + i +"'>" + column + "</div>");
 		$board.append($row);
 		for(var x = 1; x <= boardWidth; x++){
-			var counter = ('<p id = row' + cellID+ '>' + x +'</p>');
+			var counter = ('<p id = row' + cellID+ '>' +'</p>');
 			$('.row' + i).append(counter);
 			allCells.push(counter);
 			cellID = cellID +1;
@@ -26,9 +26,9 @@ createBoard(boardHeight, boardWidth);
 // startBoard picks a random number of squares to be "alive" and the places the alive squares randomly on the board
 
 function startBoard(){
-	var baseRandom = Math.floor((Math.random() * 100) + 1);
+	var baseRandom = Math.floor((Math.random() * (boardHeight * 4)) + 1);
 	for (i = 0; i <baseRandom; i++){
-		var choiceRandom1 = Math.floor((Math.random() * 899) + 1);
+		var choiceRandom1 = Math.floor((Math.random() * ((boardHeight*boardHeight) - 1)) + 1);
 		var holdcell = ($('#row' + choiceRandom1));
 		holdcell.addClass("alive");
 	}
@@ -40,8 +40,20 @@ startBoard();
 var neighborNumber = 0;
 var cellCounter;
 
+var mathFindNeighbors = [];
 
-var mathFindNeighbors = [1, 29, 30,31, -1, -29, -30, -31];
+function createMathFindNeighbors(boardHeight){
+	mathFindNeighbors.push(1);
+	mathFindNeighbors.push(-1);
+	mathFindNeighbors.push(boardHeight);
+	mathFindNeighbors.push(boardHeight + 1);
+	mathFindNeighbors.push(boardHeight - 1);
+	mathFindNeighbors.push(-boardHeight);
+	mathFindNeighbors.push(-boardHeight + 1);
+	mathFindNeighbors.push(-boardHeight - 1);
+}
+
+createMathFindNeighbors(boardHeight);
 
 function addUpaliveneighbors(mathFindNeighbors){
 	for(x = 0; x < mathFindNeighbors.length; x++){
@@ -50,7 +62,6 @@ function addUpaliveneighbors(mathFindNeighbors){
 		neighborNumber = neighborNumber + 1;
 		} 
 		}
-	console.log(neighborNumber);
 	return neighborNumber;
 }
 
@@ -73,7 +84,7 @@ function fourRules(cell, neighborNumber){
 
  // This runs the functions though all of the cells one by one
 function surveyEachCell(){
-	for(i = 0; i < 899; i++){
+	for(i = 0; i < ((boardHeight*boardHeight) - 1); i++){
 		cellCounter = i;
 		var cell = $('#row' + i);
 		addUpaliveneighbors(mathFindNeighbors);
@@ -85,7 +96,7 @@ function surveyEachCell(){
 
 setInterval(function(){
   surveyEachCell();
-}, 5000);
+}, 2000);
 
 
 

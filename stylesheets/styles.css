@@ -1,23 +1,35 @@
 
 h2{
-	margin-left: 40px;
+	font-size: 1.4em;
+	text-align: center;
+	margin-left: 35%;
+	margin-right: 35%;
+	margin-top: 3%;
+	
 }
+
+#board {
+	 margin-right: 10%;
+	 margin-left: 10%;
+	 margin-top: 2%;
+	}
 
 div{
  	clear: both;
  }
  p{
  	font-size: 10px;
- 	width: 20px;
- 	height: 20px;
+ 	width: 10px;
+ 	height: 10px;
  	float: left;
  	padding: 5px;
  	border-style: solid;
     border-width: 2px;
   
  }
-
  .alive{
  	background-color: red;
  }
+
+}
 
